@@ -12,6 +12,7 @@ fun main() {
         println("1. Mastercard and Maestro")
         println("2. Visa and Мир")
         println("3. VK pay")
+        println("Введите end для выхода")
         val chek = readln()
         if (chek == "end") {
             println("Программа завершена!")
@@ -21,13 +22,12 @@ fun main() {
         println("Введите сумму перевода в рублях:")
         val amount: Int = readLine()!!.toInt()
 
-
         val input = chek?.toInt()
 
         when (input) {
-            1 -> result_Mastercard_And_Maestro(amount)
-            2 -> result_Viza_And_Mir(amount)
-            3 -> result_VK_Pay(amount)
+            1 -> println(result_Mastercard_And_Maestro(amount))
+            2 -> println(result_Viza_And_Mir(amount))
+            3 -> println(result_VK_Pay(amount))
             else -> {
                 print("Ошибка ввода. Выберите правильный вариант")
             }
@@ -35,30 +35,30 @@ fun main() {
 
     }
 
-
 }
 
-fun result_Mastercard_And_Maestro(amount: Int) {
+fun result_Mastercard_And_Maestro(amount: Int):String {
     val result =
-        if (RUB_LIMIT_CARD_IN_DAY > amount) amount * 100 / 100 * PERCENT_MASTER_AND_MAESTRO + 2000 else print("Операция не может быть совершена")
-    println("Перевод соверен. Комиссия составила $result копеек")
-    println("")
+        if (RUB_LIMIT_CARD_IN_DAY > amount) amount * 100 / 100 * PERCENT_MASTER_AND_MAESTRO + 2000
+        else print("Операция не может быть совершена")
+       return "Перевод соверен. Комиссия составила $result копеек"
+
 }
 
-fun result_Viza_And_Mir(amount: Int) {
+fun result_Viza_And_Mir(amount: Int):String {
     val result =
         if (RUB_LIMIT_CARD_IN_DAY > amount && RUB_MIN_LIMIT_VISA_MIR < amount) amount * 100 / 100 * PERCENT_VISA_AND_MIR + 3500 else print(
             "Операция не может быть совершена"
         )
-    println("Перевод соверен. Комиссия составила $result копеек")
-    println("")
+    return "Перевод соверен. Комиссия составила $result копеек"
+
 }
 
-fun result_VK_Pay(amount: Int) {
+fun result_VK_Pay(amount: Int): String {
     val result =
         if (RUB_LIMIT_VK_PAY_ONCE > amount) amount * 100 / 100 * PERCENT_VK_PAY else print("Операция не может быть совершена")
-    println("Перевод соверен. Комиссия составила $result копеек")
-    println("")
+    return "Перевод соверен. Комиссия составила $result копеек"
+
 }
 
 
